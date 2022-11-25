@@ -2,6 +2,7 @@
 
 // TODO: Functions to provide a way to multiply the frequency and amplitude of a wave
 // TODO: Functions to add together waves (maybe implement fourier transforms)
+// TODO: Functions to compose waves ( )
 
 use std::f64::consts::PI;
 
@@ -10,8 +11,9 @@ pub fn sine(freq: f64, amp: f64, time: f64) -> f64 {
     (time * PI * 2.0 * freq).sin() * amp
 }
 
+/// A square wave. The first argument is the frequency, the second argument is the amplitude, and the third argument is the x value for the wave.
 pub fn square(freq: f64, amp: f64, time: f64) -> f64 {
-    2.0 * amp * (2.0 * (freq * time).floor() - (2.0 * freq * time).floor()) + 1.0
+    (2.0 * (2.0 * (freq * time).floor() - (2.0 * freq * time).floor()) + 1.0) * amp
 }
 
 #[cfg(test)]
@@ -38,19 +40,19 @@ mod test {
 
     #[test]
     fn test_square_time() {
-        assert_eq!(square(1.0, 1.0, 0.1), 0.0);
-        assert_eq!(square(1.0, 1.0, 0.7), 1.0);
+        assert_eq!(square(1.0, 1.0, 0.1), 1.0);
+        assert_eq!(square(1.0, 1.0, 0.7), -1.0);
     }
 
     #[test]
     fn test_square_amp() {
-        assert_eq!(square(1.0, 2.0, 0.1), 0.0);
-        assert_eq!(square(1.0, 2.0, 0.7), 2.0);
+        assert_eq!(square(1.0, 2.0, 0.1), 2.0);
+        assert_eq!(square(1.0, 2.0, 0.7), -2.0);
     }
 
     #[test]
     fn test_square_freq() {
-        assert_eq!(square(2.0, 1.0, 0.1), 0.0);
-        assert_eq!(square(2.0, 1.0, 0.3), 2.0);
+        assert_eq!(square(2.0, 1.0, 0.1), 1.0);
+        assert_eq!(square(2.0, 1.0, 0.3), -1.0);
     }
 }
