@@ -19,7 +19,7 @@ pub fn square(freq: f64, amp: f64, time: f64) -> f64 {
 }
 
 pub fn saw(freq: f64, amp: f64, time: f64) -> f64 {
-    0.0
+    ((time * freq) % 1.0) * amp
 }
 
 #[cfg(test)]
@@ -57,6 +57,24 @@ mod test {
 
     #[test]
     fn test_square_freq() {
+        assert_eq!(square(2.0, 1.0, 0.1), 1.0);
+        assert_eq!(square(2.0, 1.0, 0.3), -1.0);
+    }
+
+    #[test]
+    fn test_saw_time() {
+        assert_eq!(square(1.0, 1.0, 0.1), 0.1);
+        assert_eq!(square(1.0, 1.0, 3.7), 0.7);
+    }
+
+    #[test]
+    fn test_saw_amp() {
+        assert_eq!(square(1.0, 2.0, 0.1), 0.2);
+        assert_eq!(square(1.0, 2.0, 0.7), 1.4);
+    }
+
+    #[test]
+    fn test_saw_freq() {
         assert_eq!(square(2.0, 1.0, 0.1), 1.0);
         assert_eq!(square(2.0, 1.0, 0.3), -1.0);
     }

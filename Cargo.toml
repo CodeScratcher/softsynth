@@ -8,4 +8,4 @@ edition = "2021"
 [dependencies]
 approx = "0.5.1"
 midir = "0.8.0"
-soundio = "0.2.1"
+cpal = "0.14.1"
