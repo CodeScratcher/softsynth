@@ -6,5 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+approx = "0.5.1"
 midir = "0.8.0"
 soundio = "0.2.1"
